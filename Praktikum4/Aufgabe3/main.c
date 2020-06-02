@@ -9,14 +9,17 @@
 void *count(void *x)
 {
     int tid = *((int *) x);
+    printf("Thread with id: %lu and argument: %d started.\n", pthread_self(), tid);
     int j = tid * (ARRAYSIZE/NTHREADS);
     int* buffer = malloc((ARRAYSIZE/NTHREADS) * sizeof(*buffer));
 
     for (int i = 0; i<ARRAYSIZE/NTHREADS; i++) {
         buffer[i] = j*2;
-        printf("buffer: %d\n", buffer[i]);
+        //printf("buffer: %d\n", buffer[i]);
         j++;
     }
+    printf("Last Buffer-Object: %d  for thread: %lu\n", buffer[ARRAYSIZE/NTHREADS - 1], pthread_self());
+
     return buffer;
 }
 
@@ -40,7 +43,7 @@ int main() {
         memcpy(A+(i*ARRAYSIZE/NTHREADS),answer,(ARRAYSIZE/NTHREADS)*sizeof(int));
     }
 
-    printf("Result\n");
+    printf("Result: \n");
     for(i=0;i<ARRAYSIZE; i++) {
         printf("%d\n", A[i]);
     }
