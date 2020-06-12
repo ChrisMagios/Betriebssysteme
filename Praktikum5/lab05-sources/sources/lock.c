@@ -42,8 +42,7 @@ void * counterIncMutex() {
 
 int main() {
     pthread_t threads[NUM_THREADS];
-    int retCode;
-    retCode = sem_init(&sem, 0, 1);
+    sem_init(&sem, 0, 1);
 
     pthread_mutex_init(&mutex, NULL);
 
